@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Prueba</title>
-</head>
-<body>
-    <h1>Este es un texto de ejemplo en un encabezado H1</h1>
-    <p>Bienvenido a la página de prueba creada con HTML.</p>
-</body>
-</html>
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+    <div class="row vh-90 d-flex align-items-center justify-content-center" style="margin: 15vh 2vh 18vh 2vh">
+        <div class="col-md-6">
+                <h1>BibLuNa</h1>
+                <p style="font-size: 18px">¡Bienvenido a BibLuNa, tu aliada perfecta para gestionar todo en un solo lugar! <br> Registra fácilmente los libros de tu biblioteca, así como un control detallado de tus <br> empleados, socios y todos los préstamos realizados.</p>
+                <a class="btn btn-outline-dark px-5" href="{% url 'listado_libros' %}" >Ver Libros</a>
+                <a class="btn btn-dark px-5" href="{% url 'crear_prestamo' %}">Hacer Prestamo</a>
+        </div>
+
+        <div class="col-md-3">
+            <img src="{% static 'img/bibluna.png' %}" class="img-fluid" alt="logo" >
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Libros{% endblock title %}
+
+{% block content %}
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <div class="col-6">
+                <h5 class="mb-0">Modificar Autor</h5>
+            </div>
+
+            <div class="col-6 text-end">
+                <a class="btn btn-light p-2 px-3" href="{% url 'listado_autores' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <div class="form-group">
+                        <td><label for="nombre">Nombre:</label></td>
+                        <td><input type="text" id="nombre" name="nombre" value= '{{autor.nombre}}' required="" pattern="[a-zA-Z, ]+"></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group"> 
+                        <td><label for="apellido">Apellido:</label></td>
+                        <td><input type="text" id="apellido" name="apellido" value= '{{autor.apellido}}' required="" pattern="[a-zA-Z, ]+"></td>
+                    </div>
+                </tr>   
+                <tr> 
+                    <div class="form-group">
+                        <td><label for="nacionalidad">Nacionalidad:</label></td>
+                        <td><input type="text" id="nacionalidad" name="nacionalidad" value= '{{autor.nacionalidad}}' required="" pattern="[a-zA-Z, ]+"></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group form-check d-flex align-items-center justify-content-center">    
+                        <td><label class="form-check-label ms-2" for="activo">Activo:</label></td>
+                        <td><input type="checkbox" class="form-check-input" name="activo" {% if autor.activo %}checked{% endif %}></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="text-nceter">
+                        <td><button type="submit" class="btn btn-dark text-center">Guardar</button></td>
+                    </div>
+                </tr>
+            </table>
+        </form>
+    </div>
+                      
+{% endblock content %}

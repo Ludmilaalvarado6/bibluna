@@ -1,0 +1,47 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Nuevo Socios{% endblock title %}
+
+{% block content %}
+
+    
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <h3>Nuevo Socio</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-dark p-1 px-3 me-2" href="{% url 'listado_socios' %}">Volver</a>
+        </div>
+    </div>
+
+
+    <div class="card-body">
+
+        <form method="post">
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required="" pattern="[a-zA-Z, ]+">
+            </div>           
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" required="" pattern="[a-zA-Z, ]+">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required="">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Telefono:</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" required=""  maxlength="10" pattern="\d{10}" placeholder="3874567892">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-dark text-center">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+
+
+{% endblock content %}

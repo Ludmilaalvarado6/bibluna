@@ -1,0 +1,93 @@
+{% extends '../layout/base.html' %}
+
+{% block title %}Modificar Prestamo{% endblock title %}
+
+{% block content %}
+
+<div class="row vh-100">
+
+    <div class="col-lg-3" style="background-color: #DEDEDE;"></div>
+
+    <div class="col-lg-6 shadow-lg p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="margin-top: 15vh">
+                        <div class="card-header text-white" style="background-color: #282d37;">
+                            <div class="row d-flex align-items-center ">
+
+                                <div class="col-6">
+                                    <h5 class="mb-0">Modificar Prestamo</h5>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    <a class="btn btn-light p-2 px-3" href="{% url 'listado_prestamos' %}">Volver</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <form method="post">
+                            {% csrf_token %}
+								
+								<div class="form-group">
+									<label for="fecha_prestamo">Fecha de Préstamo:</label>
+									<input type="date" class="form-control" name="fecha_prestamo" id="fecha_prestamo" value='{{ prestamo.pres_fecha | date:"Y-m-d" }}' readonly onkeydown="return false;">
+								</div>
+								<br>
+
+								<div class="form-group">
+									<label for="fecha_devolucion">Fecha de Devolución:</label>
+									<input type="date" class="form-control" name="fecha_devolucion" id="fecha_devolucion" value='{{ prestamo.pres_devolucion| date:"Y-m-d" }}' readonly onkeydown="return false;">
+								</div>
+								<br>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="socio">Socio:</label>
+									<select class="form-select" name="socio" id="socio">
+										{% for socio in socios %}
+											{% if socio.activo %}
+												<option value="{{ socio.id }}">{{ socio.nombre }} {{ socio.apellido }}</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+                                </div>
+
+                                <div class="form-outline mb-4">
+									<label class="form-label" for="libro">Libro:</label>
+									<select class="form-select" name="libro" id="libro">
+										{% for libro in libros %}
+											{% if libro.lib_activo %}
+												<option value="{{ libro.id }}">{{libro.lib_titulo}}</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+
+                                <div class="form-outline mb-4">
+									<label class="form-label" for="empleado">Empleado:</label>
+									<select class="form-select" name="empleado" id="empleado">
+										{% for empleado in empleados %}
+											{% if empleado.emp_activo %}
+												<option value="{{ empleado.id }}">{{empleado.emp_nombre}} {{empleado.emp_apellido}}</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-dark text-center">Actualizar</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3" style="background-color: #DEDEDE;"></div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Libros{% endblock title %}
+
+{% block content %}
+
+    
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <h3>Libros</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-dark p-1 px-3 me-2" href="{% url 'nuevo_libro' %}">Nuevo</a>
+        </div>
+    </div>
+
+    <div class="mx-3">
+        <table class="table mt-4">
+            <thead>
+                <tr>
+					<th scope="col">ID</th>
+					<th scope="col">Titulo</th>
+					<th scope="col">Descripcion</th>
+					<th scope="col">ISBN</th>
+					<th scope="col">Autor</th>
+					<th scope="col">Estado</th>
+					<th scope="col">Modificar</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for libro in libros %}
+                    <tr>
+                        <th scope="row">{{libro.id}}</th>
+						<td>{{libro.titulo }}</td>
+						<td>{{libro.descripcion }}</td>
+						<td>{{libro.isbn}}</td>
+						<td>{{libro.autor}}</td>
+                        <td>
+                            {% if libro.activo %}
+                                <a href="{% url 'desactivar_libro' libro.id %}">
+                                    <i class="bi bi-check-circle-fill link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover ms-3"></i>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'activar_libro' libro.id %}">
+                                    <i class="bi bi-x-circle-fill link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover ms-3"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'modificar_libro' libro.id %}">
+                                <i class="bi bi-pencil-square link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover ms-2"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}

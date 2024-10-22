@@ -30,7 +30,7 @@ class Autor(models.Model):
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=38,null=False)
-    ISBN = models.CharField(max_length=30,null=False)
+    isbn = models.CharField(max_length=30,null=False)
     ano_publicacion = models.IntegerField(null=True,verbose_name='Año de Publicación')
     autor = models.ForeignKey(
         Autor,  
@@ -49,6 +49,7 @@ class Socio(models.Model):
     apellido = models.CharField (max_length =38,null=False)
     direccion = models.CharField (max_length =38,null=True)
     telefono = models.CharField(max_length=38,null=True)
+    activo= models.BooleanField(default=True,verbose_name='Activo')
 
     def __str__(self): 
         return f'{self.apellido}, {self.nombre}'

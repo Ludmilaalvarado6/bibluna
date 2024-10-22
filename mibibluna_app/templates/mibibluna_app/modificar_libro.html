@@ -1,0 +1,63 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Modificar libro{% endblock title %}
+
+{% block content %}
+
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <h3>Modificar libro</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-dark p-1 px-3 me-2" href="{% url 'listado_libros' %}">volver</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+        {% csrf_token %}
+
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" value='{{libro.titulo}}' required="">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" value='{{libro.descripcion}}' required="" pattern="[a-zA-Z, ]+">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="isbn">ISBN:</label>
+                <input type="text" class="form-control" id="isbn" name="isbn" value= '{{libro.isbn}}'>
+            </div>
+            <br>
+            
+            <div class="form-outline mb-4">
+                <label class="form-label" for="autor">Autor:</label>
+                <select class="form-select" name="autor" id="autor">
+                    {% for autor in autores %}
+                        <option value="{{ autor.id }}" {% if autor.id == libro.autor_id %} selected {% endif %}>
+                            {{ autor.nombre }} {{ autor.apellido }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-outline mb-4">
+                <label class="form-check-label" for="activo">Activo:</label>
+                <input type="checkbox" class="form-check-input" name="activo" id="activo" {% if libro.activo %}checked{% endif %}>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-dark text-center">Actualizar</button>
+            </div>
+
+        </form>
+    </div>
+           
+
+{% endblock content %}

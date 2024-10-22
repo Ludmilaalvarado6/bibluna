@@ -1,0 +1,58 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Agregar libro{% endblock title %}
+
+{% block content %}
+
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <h3>Nuevo libro</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-dark p-1 px-3 me-2" href="{% url 'listado_libros' %}">volver</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+        {% csrf_token %}
+
+            <div class="form-group">
+            <label for="titulo">Titulo:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required="" pattern="[a-zA-Z, ]+">
+            </div>
+            <br>
+
+            <div class="form-group">
+            <label for="descripcion">Descripcion:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required="" pattern="[a-zA-Z, ]+">
+            </div>
+            <br>
+
+            <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="number" class="form-control" id="isbn" name="isbn" required="" pattern="[0-9]*">
+            </div>
+            <br>
+            
+            <div class="form-outline mb-4">
+                <label class="form-label" for="autor">Autor:</label>
+                <select name="autor" id="autor">
+                    {% for autor in autores %}
+                        {% if autor.activo %}
+                            <option value="{{ autor.id }}">{{ autor.nombre }} {{ autor.apellido }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-dark text-center">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock content %}

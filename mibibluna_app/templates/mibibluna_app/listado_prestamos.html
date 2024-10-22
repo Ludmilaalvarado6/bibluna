@@ -1,0 +1,58 @@
+{% extends 'mibibluna_app/base.html' %}
+{% load static %}
+{% block title %}Prestamos{% endblock title %}
+
+{% block content %}
+
+    
+    <div class="row p-2 mt-5 mx-3 align-items-center" style="background-color: #DEDEDE; border-radius: 10px">
+        <div class="col text-start">
+            <h3>Nuevo empelado</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-dark p-1 px-3 me-2" href="{% url 'crear_prestamo' %}">Nuevo Prestamo</a>
+        </div>
+    </div>
+
+    <div class="mx-3">
+        <table class="table mt-4">
+            <thead>
+                <tr>
+					<th scope="col">ID</th>
+					<th scope="col">Fecha de Préstamo</th>
+					<th scope="col">Fecha de Devolución</th>
+					<th scope="col">Socio</th>
+					<th scope="col">Libro</th>
+					<th scope="col">Empleado</th>
+					<th scope="col">Modificar</th>
+					<th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for prestamo in prestamos %}
+                    <tr>
+                        <th scope="row">{{prestamo.id}}</th>
+						<td>{{prestamo.fecha_retiro | date:"d-m-Y h:m"}}</td>
+						<td>{{prestamo.fecha_devolucion | date:"d-m-Y h:m"}}</td>
+						<td>{{prestamo.socio}}</td>
+						<td>{{prestamo.libro}}</td>
+						<td>{{prestamo.empleado}}</td>
+                        <td>
+                            <a href="{% url 'modificar_prestamo' prestamo.id %}">
+                                <i class="bi bi-pencil-square link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover ms-2"></i>
+                            </a>
+                        </td>
+                        
+						<td>
+							<a href="{% url 'eliminar_prestamo' prestamo.id %}">
+                                <i class="bi bi-trash link-danger"></i>
+                            </a>
+						</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
